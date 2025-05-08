@@ -8,16 +8,20 @@ import Output from './components/Output';
 
 function App() {
 
-  const [inputVals, setInputVals] = useState({});
+  const [inputVals, setInputVals] = useState({
+    initialInvestment: 10000,
+    annualInvestment: 1200,
+    expectedReturn: 6,
+    duration: 10,
+  });
 
   function handleInputChange(event) {
-    const obj = {...inputVals};
     const name = event.target.name;
     const value = event.target.value;
-    if( value != '' ){
-      obj[name] = parseFloat(value);
-    } else delete obj[name];
-    setInputVals({...obj});
+    setInputVals(prevInput => {
+      return {...prevInput, [name]: parseFloat(value)}
+    });
+    
     console.log(obj)
   }
 
